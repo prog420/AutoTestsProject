@@ -13,6 +13,14 @@ class ProductPage(BasePage):
         product_title = self.browser.find_element(*ProductPageLocators.PRODUCT_TITLE)
         assert any(product_title.text == alert.text for alert in success_alerts), "Should be Success Alert with product title"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_ALERT), \
+            "Success message is presented, but should not be"
+
+    def is_success_message_disappeared(self):
+        assert self.is_disappered(*ProductPageLocators.SUCCESS_ALERT), \
+            "Success message is not disappeared, but should be"
+
     def should_be_info_alert_with_busket_price(self):
         info_alerts = self.browser.find_elements(*ProductPageLocators.INFO_ALERT)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
